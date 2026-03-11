@@ -1,4 +1,4 @@
-# yt-player-mcp
+# social-video-mcp
 
 MCP server that gives AI agents the ability to play videos from YouTube, TikTok, and Instagram, browse your accounts, and control playback — all through a lightweight [mpv](https://mpv.io/) player window.
 
@@ -41,8 +41,8 @@ brew install mpv yt-dlp
 ## Installation
 
 ```bash
-git clone https://github.com/ronantakizawa/yt-player-mcp.git
-cd yt-player-mcp
+git clone https://github.com/ronantakizawa/social-video-mcp.git
+cd social-video-mcp
 npm install
 npm run build
 ```

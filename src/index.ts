@@ -6,7 +6,7 @@ import * as mpv from './mpv.js';
 import { fetchFeed, fetchVideoInfo, pickVideoFields } from './ytdlp.js';
 import { validateYouTubeUrl, validateVideoUrl, validateTikTokUrl, validateInstagramUrl, checkDeps, errorResult, textResult, stripChannelSuffix, FEED_URLS } from './validate.js';
 
-const server = new McpServer({ name: 'yt-player-mcp', version: '1.2.0' });
+const server = new McpServer({ name: 'social-video-mcp', version: '2.0.0' });
 
 // --- Playback tools ---
 

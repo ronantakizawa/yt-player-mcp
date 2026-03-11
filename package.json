@@ -1,11 +1,11 @@
 {
-  "name": "yt-player-mcp",
-  "version": "1.0.0",
-  "description": "MCP server that lets AI agents play YouTube videos via mpv",
+  "name": "social-video-mcp",
+  "version": "2.0.0",
+  "description": "MCP server that lets AI agents play and browse videos from YouTube, TikTok, and Instagram via mpv",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "yt-player-mcp": "dist/index.js"
+    "social-video-mcp": "dist/index.js"
   },
   "files": [
     "dist",
