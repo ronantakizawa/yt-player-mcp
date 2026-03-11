@@ -1,7 +1,7 @@
 {
   "name": "social-video-mcp",
   "version": "2.0.0",
-  "description": "MCP server that lets AI agents play and browse videos from YouTube, TikTok, and Instagram via mpv",
+  "description": "MCP server that lets AI agents play and browse videos from YouTube and TikTok via mpv",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

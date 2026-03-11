@@ -13,8 +13,6 @@ const ALLOWED_HOSTS = [
   'www.tiktok.com',
   'tiktok.com',
   'vm.tiktok.com',
-  'www.instagram.com',
-  'instagram.com',
 ];
 
 export function validateYouTubeUrl(url: string): string | null {
@@ -33,7 +31,7 @@ export function validateVideoUrl(url: string): string | null {
   try {
     const parsed = new URL(url);
     if (!ALLOWED_HOSTS.includes(parsed.hostname)) {
-      return `URL must be a YouTube, TikTok, or Instagram link. Got: ${parsed.hostname}`;
+      return `URL must be a YouTube or TikTok link. Got: ${parsed.hostname}`;
     }
     return null;
   } catch {
@@ -46,18 +44,6 @@ export function validateTikTokUrl(url: string): string | null {
     const parsed = new URL(url);
     if (!['www.tiktok.com', 'tiktok.com', 'vm.tiktok.com'].includes(parsed.hostname)) {
       return `URL must be a TikTok link. Got: ${parsed.hostname}`;
-    }
-    return null;
-  } catch {
-    return `Invalid URL: ${url}`;
-  }
-}
-
-export function validateInstagramUrl(url: string): string | null {
-  try {
-    const parsed = new URL(url);
-    if (!['www.instagram.com', 'instagram.com'].includes(parsed.hostname)) {
-      return `URL must be an Instagram link. Got: ${parsed.hostname}`;
     }
     return null;
   } catch {

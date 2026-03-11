@@ -4,7 +4,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod';
 import * as mpv from './mpv.js';
 import { fetchFeed, fetchVideoInfo, pickVideoFields } from './ytdlp.js';
-import { validateYouTubeUrl, validateVideoUrl, validateTikTokUrl, validateInstagramUrl, checkDeps, errorResult, textResult, stripChannelSuffix, FEED_URLS } from './validate.js';
+import { validateYouTubeUrl, validateVideoUrl, validateTikTokUrl, checkDeps, errorResult, textResult, stripChannelSuffix, FEED_URLS } from './validate.js';
 
 const server = new McpServer({ name: 'social-video-mcp', version: '2.0.0' });
 
@@ -12,9 +12,9 @@ const server = new McpServer({ name: 'social-video-mcp', version: '2.0.0' });
 
 server.tool(
   'play_video',
-  'Play a video from YouTube, TikTok, or Instagram in a lightweight mpv player window. Optionally start at a specific timestamp.',
+  'Play a video from YouTube or TikTok in a lightweight mpv player window. Optionally start at a specific timestamp.',
   {
-    url: z.string().url().describe('YouTube, TikTok, or Instagram video URL'),
+    url: z.string().url().describe('YouTube or TikTok video URL'),
     timestamp: z.number().min(0).optional().describe('Start position in seconds'),
   },
   async ({ url, timestamp }) => {
@@ -216,8 +216,8 @@ server.tool(
 
 server.tool(
   'get_video_info',
-  'Fetch full metadata for a YouTube, TikTok, or Instagram video without playing it: title, description, chapters, duration, channel, upload date, view count, tags.',
-  { url: z.string().url().describe('YouTube, TikTok, or Instagram video URL') },
+  'Fetch full metadata for a YouTube or TikTok video without playing it: title, description, chapters, duration, channel, upload date, view count, tags.',
+  { url: z.string().url().describe('YouTube or TikTok video URL') },
   async ({ url }) => {
     const urlErr = validateVideoUrl(url);
     if (urlErr) return errorResult(urlErr);
@@ -491,64 +491,6 @@ server.tool(
       try { title = (await mpv.getProperty('media-title')) as string || handle; } catch { /* loading */ }
 
       return textResult({ status: 'playing_tiktok', username: handle, total: urls.length, title, shuffle });
-    } catch (err) {
-      return errorResult(`Error: ${err instanceof Error ? err.message : String(err)}`);
-    }
-  }
-);
-
-// --- Instagram tools ---
-
-server.tool(
-  'play_instagram_video',
-  'Play an Instagram Reel or post video in mpv. Requires being logged into Instagram in Chrome.',
-  {
-    url: z.string().url().describe('Instagram post or Reel URL'),
-  },
-  async ({ url }) => {
-    const urlErr = validateInstagramUrl(url);
-    if (urlErr) return errorResult(urlErr);
-    const depErr = checkDeps();
-    if (depErr) return errorResult(depErr);
-
-    try {
-      await mpv.launch({ url });
-    } catch {
-      return errorResult('mpv failed to start. Make sure you are logged into Instagram in Chrome.');
-    }
-
-    let title = url;
-    try { title = (await mpv.getProperty('media-title')) as string || url; } catch { /* loading */ }
-
-    return textResult({ status: 'playing', title, url, platform: 'instagram' });
-  }
-);
-
-server.tool(
-  'get_instagram_post_info',
-  'Fetch metadata for an Instagram post or Reel without playing it. Requires being logged into Instagram in Chrome.',
-  {
-    url: z.string().url().describe('Instagram post or Reel URL'),
-  },
-  async ({ url }) => {
-    const urlErr = validateInstagramUrl(url);
-    if (urlErr) return errorResult(urlErr);
-    const depErr = checkDeps();
-    if (depErr) return errorResult(depErr);
-
-    try {
-      const info = await fetchVideoInfo(url);
-      return textResult({
-        title: info.title,
-        uploader: info.uploader,
-        channel: info.channel,
-        duration: info.duration,
-        view_count: info.view_count,
-        like_count: info.like_count,
-        comment_count: info.comment_count,
-        description: info.description,
-        upload_date: info.upload_date,
-      });
     } catch (err) {
       return errorResult(`Error: ${err instanceof Error ? err.message : String(err)}`);
     }
