@@ -344,7 +344,7 @@ server.tool(
   'get_subscription_shorts',
   'Fetch recent Shorts from your subscribed YouTube channels. Pulls your subscriptions, then grabs the latest Shorts from each.',
   {
-    max_channels: z.number().min(1).max(20).default(5).describe('How many subscribed channels to sample (default 5)'),
+    max_channels: z.number().min(1).max(50).default(15).describe('How many subscribed channels to sample (default 15)'),
     shorts_per_channel: z.number().min(1).max(10).default(3).describe('Shorts to fetch per channel (default 3)'),
   },
   async ({ max_channels, shorts_per_channel }) => {
@@ -385,7 +385,7 @@ server.tool(
   {
     source: z.enum(['channel', 'subscriptions']).describe('"channel" or "subscriptions"'),
     channel_url: z.string().url().optional().describe('Required when source is "channel". YouTube channel URL.'),
-    max_channels: z.number().min(1).max(20).default(5).describe('When source is "subscriptions": channels to sample (default 5)'),
+    max_channels: z.number().min(1).max(50).default(15).describe('When source is "subscriptions": channels to sample (default 15)'),
     shorts_per_channel: z.number().min(1).max(10).default(3).describe('When source is "subscriptions": shorts per channel (default 3)'),
     limit: z.number().min(1).max(50).default(15).describe('When source is "channel": max shorts (default 15)'),
     shuffle: z.boolean().default(false).describe('Shuffle the playback order'),
