@@ -1,0 +1,29 @@
+{
+  "title": "Test Channel",
+  "entries": [
+    {
+      "title": "Video 1",
+      "url": "https://www.youtube.com/watch?v=abc123",
+      "channel": "TestChannel",
+      "duration": 120,
+      "view_count": 1000,
+      "upload_date": "20250301"
+    },
+    {
+      "title": "Video 2",
+      "url": "https://www.youtube.com/watch?v=def456",
+      "channel": "TestChannel",
+      "duration": 300,
+      "view_count": 5000,
+      "upload_date": "20250228"
+    },
+    {
+      "title": "Video 3",
+      "url": "https://www.youtube.com/watch?v=ghi789",
+      "channel": "TestChannel",
+      "duration": 60,
+      "view_count": 200,
+      "upload_date": "20250227"
+    }
+  ]
+}

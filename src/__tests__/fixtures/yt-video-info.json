@@ -1,0 +1,15 @@
+{
+  "title": "Full Test Video",
+  "channel": "TestChannel",
+  "upload_date": "20250301",
+  "duration": 600,
+  "view_count": 10000,
+  "like_count": 500,
+  "description": "A test video description",
+  "tags": ["test", "video"],
+  "chapters": [
+    { "title": "Intro", "start_time": 0, "end_time": 60 },
+    { "title": "Main Content", "start_time": 60, "end_time": 500 },
+    { "title": "Outro", "start_time": 500, "end_time": 600 }
+  ]
+}
